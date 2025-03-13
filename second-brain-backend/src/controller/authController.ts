@@ -27,6 +27,7 @@ export const signUp = asyncHandler(async (req: Request, res: Response) => {
         expires: COOKIE_EXPIRY,
         httpOnly: true,
         secure:true,
+        sameSite: "none",
       });
     res.status(201).json(new ApiResponse(201, "User registered successfully",{token,username:user.username}));
   } 
@@ -55,6 +56,7 @@ export const signIn = asyncHandler(async (req: Request, res: Response) => {
             expires: COOKIE_EXPIRY,
             httpOnly: true,
             secure:true,
+            sameSite: "none",
           });
           res.status(201).json(new ApiResponse(201, "user logged in successfully",{token,username:user.username}));
         }
