@@ -7,7 +7,7 @@ const errorHandler: ErrorRequestHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  // console.log('error is -----> ',error);
+  console.log('error is -----> ',error);
   
   if (error instanceof ApiError) {
     res.status(error.statusCode).json({

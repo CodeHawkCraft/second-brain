@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { getRandomHash } from "../utils/getRandomHash";
 import mongoose from "mongoose";
 import { createEmbedding } from "../utils/createEmbedding";
-import { searchVector } from "../utils/vectorSearch";
+import { refactorVectorSeach, searchVector } from "../utils/vectorSearch";
 export const createContent = asyncHandler(async (req: Request, res: Response) => {
   const {title,description}=req.body;
   const contentCreated = await ContentModel.create({
@@ -55,6 +55,7 @@ export const getContent = asyncHandler(async (req: Request, res: Response) => {
         searchWord,
         searchOption === "title" ? "titleEmbeddings" : "descriptionEmbeddings"
       );
+      output=await refactorVectorSeach(searchWord,output);
     } else {
       query[searchOption as "title" | "description"] = {
         $regex: searchWord,
@@ -67,7 +68,7 @@ export const getContent = asyncHandler(async (req: Request, res: Response) => {
     output = await ContentModel.find(query,notNeededFields);
   }
 
-  const formattedContent = output?.map((item) => ({
+  const formattedContent = output?.map((item:any) => ({
     ...(!isDeepSearch ? item.toObject() : item),
     createdAt: format(new Date(item.createdAt), "MM/dd/yyyy"),
   }));
