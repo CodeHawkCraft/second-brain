@@ -1,0 +1,35 @@
+# FRONTEND  
+# Logs  
+second-brain-frontend/logs/  
+second-brain-frontend/*.log  
+second-brain-frontend/npm-debug.log*  
+second-brain-frontend/yarn-debug.log*  
+second-brain-frontend/yarn-error.log*  
+second-brain-frontend/pnpm-debug.log*  
+second-brain-frontend/lerna-debug.log*  
+
+# Dependencies  
+second-brain-frontend/node_modules/  
+second-brain-frontend/dist/  
+second-brain-frontend/dist-ssr/  
+
+# Local Environment Files  
+second-brain-frontend/.env  
+second-brain-frontend/.env.local  
+
+# Editor Directories & Files  
+second-brain-frontend/.vscode/  
+!second-brain-frontend/.vscode/extensions.json  
+second-brain-frontend/.idea/  
+second-brain-frontend/.DS_Store  
+second-brain-frontend/*.suo  
+second-brain-frontend/*.ntvs*  
+second-brain-frontend/*.njsproj  
+second-brain-frontend/*.sln  
+second-brain-frontend/*.sw?  
+
+# BACKEND  
+second-brain-backend/node_modules/  
+second-brain-backend/dist/  
+second-brain-backend/.env  
+second-brain-backend/.env.local  

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.requiredLabel{
+    display: inline-block;
+}
+.requiredLabel::after{
+    content: '*';
+    margin-left: 2px;
+    display: inline-block; 
+    color: red;
+}
