@@ -19,7 +19,7 @@ const features = [
     icon: <FaSave />,
     title: "Capture Effortlessly",
     description:
-      "Easily save links, articles, videos, and notes with just one click.",
+      "Easily save links, articles, and notes with just one click.",
   },
   {
     icon: <FaFolderOpen />,
@@ -60,7 +60,7 @@ const Home= () => {
           <h1 className="font-bold  text-center text-6xl tracking-tight">
             <span className="block text-slate-700">Your Digital</span>
             <h2 className=" block">Second 
-            <span className="text-primary-500">Brain</span>
+            <span className="text-primary-500"> Brain</span>
             </h2>
           </h1>
           <p className="text-lg text-center max-w-2xl">
