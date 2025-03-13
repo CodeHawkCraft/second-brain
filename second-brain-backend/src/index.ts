@@ -16,8 +16,6 @@ app.use(cors({
 
 app.use(cookieParser());
 
-// searchVector();
-
 async function startServer() {
   await connectDB();
   const port = process.env.PORT || 3000;

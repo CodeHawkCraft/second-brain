@@ -1,6 +1,6 @@
 import  { useState } from 'react'
 import SideBar, { activeTabValidValues } from '../Components/SideBar'
-import DashboardContent from '../pages/DashboardContent'
+import DashboardContent from '../Components/DashboardContent'
 
 const Dashboard = () => {
   const [activeTab,setActiveTab]=useState<activeTabValidValues>('all');

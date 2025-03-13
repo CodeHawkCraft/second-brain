@@ -1,11 +1,11 @@
 import  { useEffect, useState } from 'react'
 import { CiSearch } from 'react-icons/ci';
-import Button from '../Components/ui/Button';
+import Button from './ui/Button';
 import { GoPlus } from 'react-icons/go';
-import Card, { CardProps } from '../Components/Card';
-import { activeTabValidValues } from '../Components/SideBar';
+import Card, { CardProps } from './Card';
+import { activeTabValidValues } from './SideBar';
 import {  getContent } from '../api/contentApi';
-import AddContent from '../Components/AddContent';
+import AddContent from './AddContent';
 import { useDebounce } from '../hooks/useDebounce';
 import { SearchContentOptionType } from '../utils/type';
 import { PiSmileySadFill } from 'react-icons/pi';

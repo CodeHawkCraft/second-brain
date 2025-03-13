@@ -2,7 +2,7 @@ import { addContentValidations, validContentType } from "../utils/validations";
 import PopUp from "./PopUp";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Button from "./ui/Button";
-import { AddcontentType } from "../pages/DashboardContent";
+import { AddcontentType } from "./DashboardContent";
 import { createContent } from "../api/contentApi";
 import { CardProps } from "./Card";
 type AddContentProps = {

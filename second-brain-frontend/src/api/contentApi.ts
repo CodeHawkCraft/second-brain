@@ -1,5 +1,5 @@
 import { activeTabValidValues } from "../Components/SideBar";
-import { AddcontentType } from "../pages/DashboardContent";
+import { AddcontentType } from "../Components/DashboardContent";
 import { apiHandler } from "../utils/apiHandler";
 import axiosInstance from "../utils/axiosInstance";
 import { SearchContentOptionType } from "../utils/type";

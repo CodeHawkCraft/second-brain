@@ -1,7 +1,7 @@
 import  { ReactElement } from "react";
-import NavBar from "./NavBar";
-import Buttton from "./ui/Button";
-import Footer from "./Footer";
+import NavBar from "../Components/NavBar";
+import Buttton from "../Components/ui/Button";
+import Footer from "../Components/Footer";
 import { GoPlus } from "react-icons/go";
 import { useMyContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
@@ -50,7 +50,9 @@ const Card = ({ title, icon, description }: CardProps) => {
 const Home= () => {
   const {token}=useMyContext();
   const navigate=useNavigate();
+
   return (
+    
     <div className="min-h-screen flex flex-col bg-slate-100">
       <NavBar />
 
