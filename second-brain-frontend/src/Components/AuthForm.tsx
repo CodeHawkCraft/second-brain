@@ -59,56 +59,67 @@ const AuthForm = () => {
       validationSchema={userSchemaValidations}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }) => {
+      {({ isSubmitting,setValues }) => {
         return (
           <Form className="flex flex-col gap-5">
-          {fields.map(({name,label,placeholder,type}, index) => (
-            <div key={index} className="flex flex-col gap-2">
-              <label
-                className="text-sm requiredLabel font-medium text-gray-700"
-                htmlFor={name}
-              >
-                {label}
-              </label>
-              <div className="relative">
-                <Field
+            {fields.map(({ name, label, placeholder, type, }, index) => (
+              <div key={index} className="flex flex-col gap-2">
+                <label
+                  className="text-sm requiredLabel font-medium text-gray-700"
+                  htmlFor={name}
+                >
+                  {label}
+                </label>
+                <div className="relative">
+                  <Field
+                    name={name}
+                    placeholder={placeholder}
+                    type={type === "password" && showPassword ? "text" : type}
+                    className="p-4 rounded-md w-full border outline-none"
+                  />
+                  {type === "password" && (
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                    >
+                      {!showPassword ? <IoEyeOff /> : <FaEye />}
+                    </button>
+                  )}
+                </div>
+                <ErrorMessage
                   name={name}
-                  placeholder={placeholder}
-                  type={
-                    type === "password" && showPassword
-                      ? "text"
-                      : type
-                  }
-                  className="p-4 rounded-md w-full border outline-none"
+                  component="div"
+                  className="text-wrap text-sm text-red-600"
                 />
-                {type === "password" && (
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                  >
-                    {!showPassword ? <IoEyeOff /> : <FaEye />}
-                  </button>
-                )}
               </div>
-              <ErrorMessage
-                name={name}
-                component="div"
-                className="text-wrap text-sm text-red-600"
-              />
-            </div>
-          ))}
-          <Buttton
-            type="submit"
-            disabled={isSubmitting}
-            size="lg"
-            widthFull
-            variant="primary"
-            text="SignIn"
-          />
+            ))}
 
-        </Form>
-        )
+            <div className='flex gap-3'>
+            <Buttton
+              type="submit"
+              disabled={isSubmitting}
+              size="lg"
+              widthFull
+              variant="primary"
+              text="SignIn"
+            />
+
+            <Buttton
+              size="lg"
+              onClickWithEvent={(e)=>{
+                e.preventDefault();
+                setValues(()=>{
+                  return {username:'davinder123',password:'Password2025@'}
+                })
+              }}
+              widthFull
+              variant="secondary"
+              text="Fill Test Crediantial"
+            />
+            </div>
+          </Form>
+        );
       }}
     </Formik>
   );

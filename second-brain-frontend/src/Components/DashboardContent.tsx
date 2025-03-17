@@ -142,7 +142,7 @@ const DashboardContent = ({activeTab}:DashboardContentProps) => {
       </div>
 
       {/* no content available */}
-      {content?.length == 0 && (
+      {content?.length == 0 && !loading && (
         <div className="flex w-full items-center p-10 flex-col gap-4">
           <PiSmileySadFill className="h-10 w-10 text-primary-500" />
           <h2 className="uppercase text-gray-500 text-2xl">No Content Added</h2>
