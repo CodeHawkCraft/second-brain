@@ -2,7 +2,7 @@ import React from "react";
 
 const CardShimmer = () => {
   return (
-    <div className="bg-white border h-[400px] rounded-lg shadow-sm overflow-hidden flex flex-col relative">
+    <div className=" border h-[400px] rounded-lg shadow-sm overflow-hidden flex flex-col">
       {/* Header shimmer */}
       <div className="p-4 flex justify-between border-b">
         <div className="h-8 bg-gray-200 rounded-full w-24"></div>
@@ -27,10 +27,7 @@ const CardShimmer = () => {
         </div>
       </div>
 
-      {/* Shimmer effect overlay */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="shimmer-wave"></div>
-      </div>
+
     </div>
   );
 };
