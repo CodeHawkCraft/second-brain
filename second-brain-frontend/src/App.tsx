@@ -1,11 +1,10 @@
 import { BrowserRouter, Route, Routes, Navigate, Outlet } from "react-router-dom";
-import { MyContextProvider, useMyContext } from "./Context/Context";
+import {  useMyContext } from "./Context/Context";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
 import { Toaster } from "react-hot-toast";
 import Home from "./pages/Home";
-import { useEffect, useState } from "react";
 import Loader from "./Components/Loader";
 
 // Protected route component
