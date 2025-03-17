@@ -9,7 +9,7 @@ type PopUpProps = {
 };
 const PopUp = ({ title, children, onClose, classes }: PopUpProps) => {
   return (
-    <div className="fixed inset-0  z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 px-3  z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className={`bg-white flex flex-col gap-6 w-[500px] p-6 rounded-lg ${classes}`}>
         <div className="flex border-b pb-2 justify-between items-center ">
           {title}

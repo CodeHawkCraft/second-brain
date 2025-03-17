@@ -6,3 +6,9 @@ export const fetchProfile = async () => {
   });
 };
 
+export const updateUserName = async (userName:string) => {
+  return apiHandler(() => axiosInstance.patch(`user/${userName}`), {
+    showSuccessToast:true,
+    showErrorToast:true
+  });
+};

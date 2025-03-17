@@ -11,6 +11,8 @@ interface MyContextType {
   setUsername: (token: string | null) => void;
   userLogout:()=>void;
   loading:boolean,
+  openChangeUserName:boolean,
+  setOpenChangeUserName:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MyContext = createContext<MyContextType | null>(null);
@@ -19,6 +21,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
   const [username, setUsername]=useState<string|null>(null);
   const [loading,setLoading]=useState(true);
+  const [openChangeUserName,setOpenChangeUserName]=useState(false);
   async function fetchUser() {
     try {
       const response = (await fetchProfile()) as User;
@@ -44,7 +47,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     },[])
 
   return (
-    <MyContext.Provider value={{ token,loading, setToken ,username,setUsername,userLogout}}>
+    <MyContext.Provider value={{ token,loading,openChangeUserName,setOpenChangeUserName, setToken ,username,setUsername,userLogout}}>
       {children}
     </MyContext.Provider>
   );

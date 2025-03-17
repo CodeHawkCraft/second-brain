@@ -12,7 +12,7 @@ import { MdOutlineModeEdit } from "react-icons/md";
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate=useNavigate();
-  const {token,username,userLogout}=useMyContext();
+  const {token,username,userLogout,setOpenChangeUserName}=useMyContext();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const handleNavigation=(e: React.MouseEvent<HTMLButtonElement>)=>{
@@ -90,9 +90,14 @@ const NavBar = () => {
                 : "opacity-0 translate-y-2"
             }`}
           >
-            <div className="flex cursor-pointer hover:bg-blue-100 border-b justify-between items-center p-2">
+            <div
+              onClick={() => {
+                setOpenChangeUserName(true);
+              }}
+              className="flex cursor-pointer hover:bg-blue-100 border-b justify-between items-center p-2"
+            >
               <p className="w-full flex px-4 py-3"> {username}</p>
-                <MdOutlineModeEdit />
+              <MdOutlineModeEdit />
             </div>
             <div
               className="flex hover:bg-red-400 hover:text-white  transition-colors cursor-pointer justify-between items-center p-2"
@@ -101,34 +106,36 @@ const NavBar = () => {
               }}
             >
               <p className="w-full flex px-4 py-3"> logout</p>
-                <IoIosLogOut />
+              <IoIosLogOut />
             </div>
           </div>
         )}
 
         {/* hamburger menu */}
-        <div
-          onClick={() => {
-            setIsMenuOpen(!isMenuOpen);
-          }}
-          className="sm:hidden hover:bg-slate-200 p-2 cursor-pointer rounded-md"
-        >
-          {!isMenuOpen ? <RxHamburgerMenu /> : <IoMdClose />}
-        </div>
+        {!token && (
+          <div
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+            }}
+            className="sm:hidden hover:bg-slate-200 p-2 cursor-pointer rounded-md"
+          >
+            {!isMenuOpen ? <RxHamburgerMenu /> : <IoMdClose />}
+          </div>
+        )}
       </div>
 
-      {isMenuOpen && (
-        <div className="flex sm:hidden p-3 flex-col gap-3">
+      {isMenuOpen && !token && (
+        <div className="flex items-center sm:hidden p-3 flex-col gap-3">
           <Buttton
             onClickWithEvent={handleNavigation}
-            widthFull
+            classes="w-full"
             variant="secondary"
             text="Sign In"
             size="sm"
           />
           <Buttton
             onClickWithEvent={handleNavigation}
-            widthFull
+              classes="w-full"
             variant="primary"
             text="Sign Up"
             size="sm"

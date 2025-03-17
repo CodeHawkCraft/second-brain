@@ -13,6 +13,7 @@ type CardProps = {
 };
 
 import { FaSave, FaFolderOpen, FaSearch } from "react-icons/fa";
+import ChangeUserName from "../Components/ChangeUserName";
 
 const features = [
   {
@@ -92,6 +93,9 @@ const Home= () => {
           })}
         </div>
       </main>
+
+       {/* change userName */}
+      <ChangeUserName/>
 
       <Footer />
     </div>
