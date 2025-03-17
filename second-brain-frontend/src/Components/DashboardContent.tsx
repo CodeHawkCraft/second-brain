@@ -10,6 +10,7 @@ import { useDebounce } from '../hooks/useDebounce';
 import { SearchContentOptionType } from '../utils/type';
 import { PiSmileySadFill } from 'react-icons/pi';
 import { SiDeepin } from 'react-icons/si';
+import CardShimmer from './CardShimmer';
 
 
 
@@ -29,22 +30,31 @@ const DashboardContent = ({activeTab}:DashboardContentProps) => {
      const [searchTerm, setSearchTerm] = useState('');
      const [addContent,setAddContent]=useState(false);
       const [content, setContent] = useState<CardProps[]|null>(null);
-
+  
+      const [loading,setLoading]=useState(true);
   const debouncedValue=useDebounce(searchTerm);
 
   async function fetchContent(isDeepSearch:boolean=false) {
-    let response;
-    if (debouncedValue) {
-      response = (await getContent(
-        activeTab,
-        debouncedValue,
-        searchOption,
-        isDeepSearch
-      )) as CardProps[];
-    } else {
-      response = (await getContent(activeTab)) as CardProps[];
+    try {
+      let response;
+      if (debouncedValue) {
+        setLoading(true);
+        response = (await getContent(
+          activeTab,
+          debouncedValue,
+          searchOption,
+          isDeepSearch
+        )) as CardProps[];
+      } else {
+        response = (await getContent(activeTab)) as CardProps[];
+      }
+      setContent(response);
+    } catch (error) {
+      
     }
-    setContent(response);
+    finally{
+      setLoading(false);
+    }
   }
   
   useEffect(()=>{
@@ -84,9 +94,9 @@ const DashboardContent = ({activeTab}:DashboardContentProps) => {
           Your Saved Content
         </h2>
         <div className="flex gap-3">
-        <Button
+          <Button
             variant="secondary"
-            onClickWithoutEvent={()=>{
+            onClickWithoutEvent={() => {
               fetchContent(true);
             }}
             disabled={!searchTerm}
@@ -106,30 +116,38 @@ const DashboardContent = ({activeTab}:DashboardContentProps) => {
         </div>
       </div>
 
-      {/* cards */}
-      {content?.length!=0 && (
-        <div className="grid gap-10 lg:grid-cols-3">
-          {content?.map((card, index) => {
-            return (
-              <Card
-                key={index}
-                onDelete={() => {
-                  setContent(content.filter((c) => c._id !== card._id));
-                }}
-                {...card}
-              ></Card>
-            );
-          })}
-        </div>
-      )}
+      
+      <div className="grid gap-10 lg:grid-cols-3">
+        {loading ? (
+          <>
+            <CardShimmer />
+            <CardShimmer />
+            <CardShimmer />
+          </>
+        ) : (
+          <>
+            {content?.map((card, index) => {
+              return (
+                <Card
+                  key={index}
+                  onDelete={() => {
+                    setContent(content.filter((c) => c._id !== card._id));
+                  }}
+                  {...card}
+                ></Card>
+              );
+            })}
+          </>
+        )}
+      </div>
 
       {/* no content available */}
-      {content?.length==0 && 
-      <div className='flex w-full items-center p-10 flex-col gap-4'>
-      <PiSmileySadFill className='h-10 w-10 text-primary-500' />
-      <h2 className='uppercase text-gray-500 text-2xl'>No Content Added</h2>
-      </div>
-      }
+      {content?.length == 0 && (
+        <div className="flex w-full items-center p-10 flex-col gap-4">
+          <PiSmileySadFill className="h-10 w-10 text-primary-500" />
+          <h2 className="uppercase text-gray-500 text-2xl">No Content Added</h2>
+        </div>
+      )}
 
       {/* add content form */}
       {addContent && (

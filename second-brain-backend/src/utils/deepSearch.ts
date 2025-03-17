@@ -13,10 +13,8 @@ Match if the title, description, or type *contains* the query.
 Return ONLY a valid JSON array.
 
 Input Data: ${JSON.stringify(arr)}`;
-  console.log("arr is -----> ",arr)
   const result = await model.generateContent(prompt);
   const responseText = result.response.text();
-  console.log("responseText is -----> ",responseText)
   const jsonString = responseText.replace(/```json|```/g, "").trim();
   if (!jsonString) {
     throw new ApiError(
