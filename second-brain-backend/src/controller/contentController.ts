@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { getRandomHash } from "../utils/getRandomHash";
 import mongoose from "mongoose";
 import { createEmbedding } from "../utils/createEmbedding";
-import { refactorVectorSeach, searchVector } from "../utils/vectorSearch";
+import { searchWithGemini } from "../utils/deepSearch";
 export const createContent = asyncHandler(async (req: Request, res: Response) => {
   const {title,description}=req.body;
   const contentCreated = await ContentModel.create({
@@ -50,12 +50,9 @@ export const getContent = asyncHandler(async (req: Request, res: Response) => {
   };
   if (searchWord && searchOption) {
     if (isDeepSearch) {
-      console.log("going to deee search");
-      output = await searchVector(
-        searchWord,
-        searchOption === "title" ? "titleEmbeddings" : "descriptionEmbeddings"
-      );
-      output=await refactorVectorSeach(searchWord,output);
+      output=await ContentModel.find({userId:req.userId},{_id:0,userId:0,updatedAt:0,__v:0});
+      output=await searchWithGemini(searchWord,output);
+      console.log()
     } else {
       query[searchOption as "title" | "description"] = {
         $regex: searchWord,
