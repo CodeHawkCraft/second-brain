@@ -5,6 +5,8 @@ import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
 import { Toaster } from "react-hot-toast";
 import Home from "./pages/Home";
+import { useEffect, useState } from "react";
+import Loader from "./Components/Loader";
 
 // Protected route component
 const ProtectedRoute = () => {
@@ -28,8 +30,9 @@ const GuestRoute = () => {
 };
 
 function App() {
+  const {loading}=useMyContext();
+  if(loading) return <Loader/>
   return (
-    <MyContextProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -45,7 +48,6 @@ function App() {
         </Routes>
         <Toaster />
       </BrowserRouter>
-    </MyContextProvider>
   );
 }
 

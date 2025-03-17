@@ -10,6 +10,7 @@ interface MyContextType {
   username:string|null;
   setUsername: (token: string | null) => void;
   userLogout:()=>void;
+  loading:boolean,
 }
 
 const MyContext = createContext<MyContextType | null>(null);
@@ -17,10 +18,19 @@ const MyContext = createContext<MyContextType | null>(null);
 export const MyContextProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
   const [username, setUsername]=useState<string|null>(null);
+  const [loading,setLoading]=useState(true);
   async function fetchUser() {
-    const response = (await fetchProfile()) as User;
-    setUsername(response.username);
-    setToken(response.token);
+    try {
+      const response = (await fetchProfile()) as User;
+      setUsername(response.username);
+      setToken(response.token);
+    } catch (error) {
+      
+    }
+    finally{
+      setLoading(false);
+    }
+    
   }
 
   async function userLogout(){
@@ -34,7 +44,7 @@ export const MyContextProvider = ({ children }: { children: ReactNode }) => {
     },[])
 
   return (
-    <MyContext.Provider value={{ token, setToken ,username,setUsername,userLogout}}>
+    <MyContext.Provider value={{ token,loading, setToken ,username,setUsername,userLogout}}>
       {children}
     </MyContext.Provider>
   );

@@ -61,9 +61,9 @@ const Home= () => {
         <div className="flex gap-6 items-center justify-center flex-col ">
           <h1 className="font-bold  text-center text-6xl tracking-tight">
             <span className="block text-slate-700">Your Digital</span>
-            <h2 className=" block">Second 
+            <span className=" block">Second 
             <span className="text-primary-500"> Brain</span>
-            </h2>
+            </span>
           </h1>
           <p className="text-lg text-center max-w-2xl">
             Save, organize, and find your important links and resources in one
