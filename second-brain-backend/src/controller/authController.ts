@@ -69,6 +69,7 @@ export const logOut= asyncHandler(async (req: Request, res: Response) => {
     expires: new Date(0),
     httpOnly: true,
     secure: true,
+    sameSite: "none",
   });
 
   res.status(200).json(new ApiResponse(200, "Logged out successfully"));
